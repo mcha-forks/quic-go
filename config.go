@@ -108,6 +108,10 @@ func populateConfig(config *Config) *Config {
 	} else if maxIncomingUniStreams < 0 {
 		maxIncomingUniStreams = 0
 	}
+	maxDatagrameFrameSize := config.MaxDatagramFrameSize
+	if maxDatagrameFrameSize == 0 {
+		maxDatagrameFrameSize = int64(protocol.DefaultMaxDatagramFrameSize)
+	}
 
 	return &Config{
 		GetConfigForClient:               config.GetConfigForClient,
@@ -127,6 +131,7 @@ func populateConfig(config *Config) *Config {
 		MaxIncomingUniStreams:            maxIncomingUniStreams,
 		TokenStore:                       config.TokenStore,
 		EnableDatagrams:                  config.EnableDatagrams,
+		MaxDatagramFrameSize:             maxDatagrameFrameSize,
 		DisablePathMTUDiscovery:          config.DisablePathMTUDiscovery,
 		DisableVersionNegotiationPackets: config.DisableVersionNegotiationPackets,
 		Allow0RTT:                        config.Allow0RTT,

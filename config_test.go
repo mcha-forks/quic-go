@@ -102,6 +102,8 @@ var _ = Describe("Config", func() {
 				f.Set(reflect.ValueOf(time.Second))
 			case "EnableDatagrams":
 				f.Set(reflect.ValueOf(true))
+			case "MaxDatagramFrameSize":
+				f.Set(reflect.ValueOf(int64(1200)))
 			case "DisableVersionNegotiationPackets":
 				f.Set(reflect.ValueOf(true))
 			case "DisablePathMTUDiscovery":
@@ -194,6 +196,7 @@ var _ = Describe("Config", func() {
 			Expect(c.MaxIncomingUniStreams).To(BeEquivalentTo(protocol.DefaultMaxIncomingUniStreams))
 			Expect(c.DisableVersionNegotiationPackets).To(BeFalse())
 			Expect(c.DisablePathMTUDiscovery).To(BeFalse())
+			Expect(c.MaxDatagramFrameSize).To(BeEquivalentTo(protocol.DefaultMaxDatagramFrameSize))
 			Expect(c.GetConfigForClient).To(BeNil())
 		})
 
